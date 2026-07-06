@@ -70,13 +70,12 @@ export function FlatlayScene() {
     setIsDebug(new URLSearchParams(window.location.search).get("debug") === "true");
   }, []);
 
-  const [isPhonePortrait, setIsPhonePortrait] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(orientation: portrait) and (max-width: 768px)");
-    setIsPhonePortrait(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setIsPhonePortrait(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
+    const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
   }, []);
 
   const [debugImages, setDebugImages] = useState<Record<Preset, ImageState>>({
@@ -109,16 +108,12 @@ export function FlatlayScene() {
   }, [openPanelId]);
 
   const currentDebugImage = debugImages[debugPreset];
-  const imgScale = isDebug
-    ? currentDebugImage.scale
-    : isPhonePortrait
-      ? MOBILE_IMG_SCALE
-      : IMG_SCALE;
-  const imgX = isDebug ? currentDebugImage.x : isPhonePortrait ? MOBILE_IMG_X : IMG_X;
-  const imgY = isDebug ? currentDebugImage.y : isPhonePortrait ? MOBILE_IMG_Y : IMG_Y;
+  const imgScale = isDebug ? currentDebugImage.scale : isMobile ? MOBILE_IMG_SCALE : IMG_SCALE;
+  const imgX = isDebug ? currentDebugImage.x : isMobile ? MOBILE_IMG_X : IMG_X;
+  const imgY = isDebug ? currentDebugImage.y : isMobile ? MOBILE_IMG_Y : IMG_Y;
   const presetDims = isDebug ? PRESET_OPTIONS[debugPreset] : null;
   const flatlaySrc =
-    (isDebug && debugPreset === "iphone") || (!isDebug && isPhonePortrait)
+    (isDebug && debugPreset === "iphone") || (!isDebug && isMobile)
       ? FLATLAY_MOBILE
       : FLATLAY_DESKTOP;
 
@@ -218,7 +213,7 @@ export function FlatlayScene() {
 
         {FLATLAY_OBJECTS.map((obj) => {
           const interactive = obj.panelContent !== null;
-          const pos = getPos(obj, isPhonePortrait);
+          const pos = getPos(obj, isMobile);
           return (
             <FlatlayObject
               key={obj.id}
