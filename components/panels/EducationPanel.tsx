@@ -12,9 +12,7 @@ export function EducationPanel({ entries }: EducationContent) {
             <span className="shrink-0 font-mono text-[10px] text-text-tertiary">{entry.dates}</span>
           </div>
           <p className="mb-1 text-xs text-text-secondary">{entry.qualification}</p>
-          {entry.grade && (
-            <p className="font-mono text-[10px] text-text-tertiary">{entry.grade}</p>
-          )}
+          {entry.grade && <p className="font-mono text-[10px] text-text-tertiary">{entry.grade}</p>}
         </div>
       ))}
     </div>

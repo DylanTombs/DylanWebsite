@@ -25,7 +25,7 @@ const DebugLayer = dynamic(
 );
 
 const FLATLAY_DESKTOP = "/flatlay/Flatlay.png";
-const FLATLAY_MOBILE  = "/flatlay/FlatlayPhone.png";
+const FLATLAY_MOBILE = "/flatlay/FlatlayPhone.png";
 
 const IMG_SCALE = 1.45;
 const IMG_X = 49.5;
@@ -39,18 +39,25 @@ function getPos(obj: FlatlayObjectDef, isMobile: boolean): ObjectPosition {
 function renderPanelContent(content: PanelContent | null): React.ReactNode {
   if (!content) return null;
   switch (content.kind) {
-    case "contact":      return <ContactPanel {...content} />;
-    case "about":        return <AboutPanel {...content} />;
-    case "experience":   return <ExperiencePanel {...content} />;
-    case "projects":     return <ProjectsPanel {...content} />;
-    case "education":    return <EducationPanel {...content} />;
-    case "achievements": return <AchievementsPanel {...content} />;
-    case "skills":       return <SkillsPanel {...content} />;
+    case "contact":
+      return <ContactPanel {...content} />;
+    case "about":
+      return <AboutPanel {...content} />;
+    case "experience":
+      return <ExperiencePanel {...content} />;
+    case "projects":
+      return <ProjectsPanel {...content} />;
+    case "education":
+      return <EducationPanel {...content} />;
+    case "achievements":
+      return <AchievementsPanel {...content} />;
+    case "skills":
+      return <SkillsPanel {...content} />;
   }
 }
 
 export function FlatlayScene() {
-  const containerRef   = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const panelSectionRef = useRef<HTMLDivElement>(null);
 
   const [isDebug, setIsDebug] = useState(false);
@@ -67,7 +74,11 @@ export function FlatlayScene() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const [debugImage, setDebugImage] = useState<ImageState>({ scale: IMG_SCALE, x: IMG_X, y: IMG_Y });
+  const [debugImage, setDebugImage] = useState<ImageState>({
+    scale: IMG_SCALE,
+    x: IMG_X,
+    y: IMG_Y,
+  });
   const [debugPreset, setDebugPreset] = useState<Preset>("desktop");
   const [activeId, setActiveId] = useState<string | null>(null);
   const [openPanelId, setOpenPanelId] = useState<string | null>(null);
@@ -93,8 +104,8 @@ export function FlatlayScene() {
   }, [openPanelId]);
 
   const imgScale = isDebug ? debugImage.scale : IMG_SCALE;
-  const imgX     = isDebug ? debugImage.x : IMG_X;
-  const imgY     = isDebug ? debugImage.y : IMG_Y;
+  const imgX = isDebug ? debugImage.x : IMG_X;
+  const imgY = isDebug ? debugImage.y : IMG_Y;
   const presetDims = isDebug ? PRESET_OPTIONS[debugPreset] : null;
   const flatlaySrc =
     (isDebug && debugPreset === "iphone") || (!isDebug && isPhonePortrait)
@@ -108,19 +119,44 @@ export function FlatlayScene() {
   // ── Debug layout ──────────────────────────────────────────────────────────
   if (isDebug) {
     return (
-      <div style={{ width: "100dvw", height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0a0a0a", overflow: "hidden" }}>
+      <div
+        style={{
+          width: "100dvw",
+          height: "100dvh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#0a0a0a",
+          overflow: "hidden",
+        }}
+      >
         <div
           ref={containerRef}
           style={{
             position: "relative",
             overflow: "hidden",
             ...(presetDims
-              ? { width: presetDims.width, height: presetDims.height, boxShadow: "0 0 0 1px rgba(255,255,255,0.15), 0 8px 48px rgba(0,0,0,0.8)" }
+              ? {
+                  width: presetDims.width,
+                  height: presetDims.height,
+                  boxShadow: "0 0 0 1px rgba(255,255,255,0.15), 0 8px 48px rgba(0,0,0,0.8)",
+                }
               : { width: "100%", height: "100%" }),
           }}
         >
-          <Image src={flatlaySrc} alt="Workspace flat-lay" fill priority sizes="100vw" className="object-cover"
-            style={{ objectPosition: `${imgX}% ${imgY}%`, transform: `scale(${imgScale})`, transformOrigin: "center center" }} />
+          <Image
+            src={flatlaySrc}
+            alt="Workspace flat-lay"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+            style={{
+              objectPosition: `${imgX}% ${imgY}%`,
+              transform: `scale(${imgScale})`,
+              transformOrigin: "center center",
+            }}
+          />
           <DebugLayer
             key={debugPreset}
             objects={FLATLAY_OBJECTS}
@@ -144,7 +180,12 @@ export function FlatlayScene() {
        */}
       <div
         ref={containerRef}
-        style={{ height: "100dvh", position: "relative", overflow: "hidden", background: "#0a0a0a" }}
+        style={{
+          height: "100dvh",
+          position: "relative",
+          overflow: "hidden",
+          background: "#0a0a0a",
+        }}
       >
         <Image
           src={flatlaySrc}
@@ -153,7 +194,11 @@ export function FlatlayScene() {
           priority
           sizes="100vw"
           className="object-cover"
-          style={{ objectPosition: `${imgX}% ${imgY}%`, transform: `scale(${imgScale})`, transformOrigin: "center center" }}
+          style={{
+            objectPosition: `${imgX}% ${imgY}%`,
+            transform: `scale(${imgScale})`,
+            transformOrigin: "center center",
+          }}
         />
 
         {FLATLAY_OBJECTS.map((obj) => {
@@ -172,8 +217,12 @@ export function FlatlayScene() {
               placeholder={obj.placeholder}
               interactive={interactive}
               isActive={interactive && (activeId === obj.id || openPanelId === obj.id)}
-              onClick={() => { if (interactive) togglePanel(obj.id); }}
-              onActivate={() => { if (interactive) setActiveId(obj.id); }}
+              onClick={() => {
+                if (interactive) togglePanel(obj.id);
+              }}
+              onActivate={() => {
+                if (interactive) setActiveId(obj.id);
+              }}
               onDeactivate={() => setActiveId(null)}
             />
           );
@@ -190,7 +239,12 @@ export function FlatlayScene() {
       {activeObj !== null && (
         <div
           ref={panelSectionRef}
-          style={{ minHeight: "45dvh", display: "flex", flexDirection: "column", background: "#0a0a0a" }}
+          style={{
+            minHeight: "45dvh",
+            display: "flex",
+            flexDirection: "column",
+            background: "#0a0a0a",
+          }}
         >
           <Panel onClose={closePanel} title={activeObj.panelTitle}>
             {renderPanelContent(activeObj.panelContent)}

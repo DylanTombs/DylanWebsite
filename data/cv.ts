@@ -97,7 +97,7 @@ export const experience: readonly Experience[] = [
     period: { start: "Jun 2025", end: "Aug 2025", current: false },
     bullets: [
       "Refactored and deployed an Azure Function pipeline for a new AU region, introducing Durable Functions to parallelise workflows,",
-      "Migrated 10 Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configurationMigrated [X] Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configuration"
+      "Migrated 10 Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configurationMigrated [X] Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configuration",
     ],
   },
   {

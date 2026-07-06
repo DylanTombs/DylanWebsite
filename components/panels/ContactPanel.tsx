@@ -117,18 +117,8 @@ import type { ContactContent } from "@/data/flatlayObjects";
 export function ContactPanel({ email, github, linkedin }: ContactContent) {
   return (
     <div className="flex flex-col">
-      <CopyRow
-        icon={<EmailIcon />}
-        label="Email"
-        value={email}
-        href={`mailto:${email}`}
-      />
-      <CopyRow
-        icon={<GitHubIcon />}
-        label="GitHub"
-        value={github}
-        href={`https://${github}`}
-      />
+      <CopyRow icon={<EmailIcon />} label="Email" value={email} href={`mailto:${email}`} />
+      <CopyRow icon={<GitHubIcon />} label="GitHub" value={github} href={`https://${github}`} />
       <CopyRow
         icon={<LinkedInIcon />}
         label="LinkedIn"

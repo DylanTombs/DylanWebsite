@@ -22,20 +22,14 @@ function nativeOf(e: React.MouseEvent | React.TouchEvent): MouseEvent | TouchEve
   return e.nativeEvent as MouseEvent | TouchEvent;
 }
 
-function attachDrag(
-  onMove: (e: MouseEvent | TouchEvent) => void,
-  onUp: () => void,
-): void {
+function attachDrag(onMove: (e: MouseEvent | TouchEvent) => void, onUp: () => void): void {
   window.addEventListener("mousemove", onMove, { passive: false });
   window.addEventListener("mouseup", onUp);
   window.addEventListener("touchmove", onMove, { passive: false });
   window.addEventListener("touchend", onUp);
 }
 
-function detachDrag(
-  onMove: (e: MouseEvent | TouchEvent) => void,
-  onUp: () => void,
-): void {
+function detachDrag(onMove: (e: MouseEvent | TouchEvent) => void, onUp: () => void): void {
   window.removeEventListener("mousemove", onMove);
   window.removeEventListener("mouseup", onUp);
   window.removeEventListener("touchmove", onMove);
@@ -202,7 +196,13 @@ export function DebugObject({ obj, pos, isSelected, onSelect, onUpdate, containe
           alt={obj.label}
           draggable={false}
           onError={() => setImgFailed(true)}
-          style={{ width: "100%", height: "auto", display: "block", pointerEvents: "none", userSelect: "none" }}
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
         />
       )}
 

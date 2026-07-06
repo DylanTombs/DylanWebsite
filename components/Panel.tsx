@@ -10,7 +10,7 @@ interface PanelProps {
 }
 
 export function Panel({ onClose, title, children }: PanelProps) {
-  const controls     = useAnimation();
+  const controls = useAnimation();
   const dragControls = useDragControls();
 
   useEffect(() => {
@@ -70,7 +70,9 @@ export function Panel({ onClose, title, children }: PanelProps) {
           touchAction: "none",
         }}
       >
-        <div style={{ width: 36, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.22)" }} />
+        <div
+          style={{ width: 36, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.22)" }}
+        />
       </div>
 
       {/* Header */}
@@ -83,16 +85,23 @@ export function Panel({ onClose, title, children }: PanelProps) {
           flexShrink: 0,
         }}
       >
-        <h2 className="font-mono text-sm font-medium tracking-tight text-text-primary">
-          {title}
-        </h2>
+        <h2 className="font-mono text-sm font-medium tracking-tight text-text-primary">{title}</h2>
         <button
           type="button"
           onClick={onClose}
           aria-label="Close panel"
           className="flex h-7 w-7 items-center justify-center rounded-sm text-text-tertiary transition-colors duration-150 hover:text-text-primary"
         >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" aria-hidden>
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 12 12"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            aria-hidden
+          >
             <path d="M1 1l10 10M11 1L1 11" />
           </svg>
         </button>

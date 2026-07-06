@@ -37,7 +37,13 @@ function buildImageTS(img: ImageState): string {
 const PANEL_WIDTH = 256;
 const PRESETS: Preset[] = ["desktop", "iphone", "ipad"];
 
-export function DebugReadout({ positions, imageState, onImageChange, preset, onPresetChange }: Props) {
+export function DebugReadout({
+  positions,
+  imageState,
+  onImageChange,
+  preset,
+  onPresetChange,
+}: Props) {
   const panelRef = useRef<HTMLDivElement>(null);
   const dragOffset = useRef({ x: 0, y: 0 });
 
@@ -57,7 +63,10 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
 
     const onMove = (ev: MouseEvent) => {
       setPos({
-        x: Math.max(0, Math.min(window.innerWidth - PANEL_WIDTH - 4, ev.clientX - dragOffset.current.x)),
+        x: Math.max(
+          0,
+          Math.min(window.innerWidth - PANEL_WIDTH - 4, ev.clientX - dragOffset.current.x),
+        ),
         y: Math.max(0, Math.min(window.innerHeight - 44, ev.clientY - dragOffset.current.y)),
       });
     };
@@ -133,9 +142,12 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
         <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
           {/* drag grip dots */}
           <svg width="10" height="14" viewBox="0 0 10 14" fill="rgba(255,255,255,0.3)" aria-hidden>
-            <circle cx="2" cy="2"  r="1.5" /><circle cx="8" cy="2"  r="1.5" />
-            <circle cx="2" cy="7"  r="1.5" /><circle cx="8" cy="7"  r="1.5" />
-            <circle cx="2" cy="12" r="1.5" /><circle cx="8" cy="12" r="1.5" />
+            <circle cx="2" cy="2" r="1.5" />
+            <circle cx="8" cy="2" r="1.5" />
+            <circle cx="2" cy="7" r="1.5" />
+            <circle cx="8" cy="7" r="1.5" />
+            <circle cx="2" cy="12" r="1.5" />
+            <circle cx="8" cy="12" r="1.5" />
           </svg>
           <span style={{ color: "#fff", fontWeight: 600, fontSize: 12, letterSpacing: "0.04em" }}>
             debug
@@ -190,7 +202,13 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
       {!collapsed && (
         <div style={{ padding: "10px 14px 14px" }}>
           {/* Viewport presets */}
-          <div style={{ paddingBottom: 12, marginBottom: 4, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+          <div
+            style={{
+              paddingBottom: 12,
+              marginBottom: 4,
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
             <div style={{ color: "#e2e2e2", fontSize: 11, marginBottom: 8 }}>viewport</div>
             <div style={{ display: "flex", gap: 6 }}>
               {PRESETS.map((p) => {
@@ -225,12 +243,33 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
           </div>
 
           {/* Image controls */}
-          <div style={{ paddingBottom: 12, marginBottom: 4, borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <div
+            style={{
+              paddingBottom: 12,
+              marginBottom: 4,
+              borderBottom: "1px solid rgba(255,255,255,0.08)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 6,
+              }}
+            >
               <span style={{ color: "#e2e2e2", fontSize: 11 }}>image</span>
               <button
                 onClick={copyImage}
-                style={{ padding: "2px 7px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 3, color: "#888", fontSize: 10, cursor: "pointer" }}
+                style={{
+                  padding: "2px 7px",
+                  background: "transparent",
+                  border: "1px solid rgba(255,255,255,0.12)",
+                  borderRadius: 3,
+                  color: "#888",
+                  fontSize: 10,
+                  cursor: "pointer",
+                }}
               >
                 Copy
               </button>
@@ -240,32 +279,75 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
               <span>scale</span>
               <span style={{ color: "#e2e2e2" }}>{imageState.scale.toFixed(2)}×</span>
             </div>
-            <input type="range" min={0.8} max={3} step={0.01} value={imageState.scale}
-              onChange={(e) => onImageChange({ scale: parseFloat(e.target.value) })} style={sliderStyle} />
+            <input
+              type="range"
+              min={0.8}
+              max={3}
+              step={0.01}
+              value={imageState.scale}
+              onChange={(e) => onImageChange({ scale: parseFloat(e.target.value) })}
+              style={sliderStyle}
+            />
 
             <div style={labelRowStyle}>
               <span>x pos</span>
               <span style={{ color: "#e2e2e2" }}>{imageState.x.toFixed(1)}%</span>
             </div>
-            <input type="range" min={0} max={100} step={0.5} value={imageState.x}
-              onChange={(e) => onImageChange({ x: parseFloat(e.target.value) })} style={sliderStyle} />
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={0.5}
+              value={imageState.x}
+              onChange={(e) => onImageChange({ x: parseFloat(e.target.value) })}
+              style={sliderStyle}
+            />
 
             <div style={labelRowStyle}>
               <span>y pos</span>
               <span style={{ color: "#e2e2e2" }}>{imageState.y.toFixed(1)}%</span>
             </div>
-            <input type="range" min={0} max={100} step={0.5} value={imageState.y}
-              onChange={(e) => onImageChange({ y: parseFloat(e.target.value) })} style={sliderStyle} />
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={0.5}
+              value={imageState.y}
+              onChange={(e) => onImageChange({ y: parseFloat(e.target.value) })}
+              style={sliderStyle}
+            />
           </div>
 
           {/* Per-object rows */}
           {positions.map((pos) => (
-            <div key={pos.id} style={{ paddingTop: 8, paddingBottom: 8, borderBottom: "1px solid rgba(255,255,255,0.05)" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 5 }}>
+            <div
+              key={pos.id}
+              style={{
+                paddingTop: 8,
+                paddingBottom: 8,
+                borderBottom: "1px solid rgba(255,255,255,0.05)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: 5,
+                }}
+              >
                 <span style={{ color: "#e2e2e2", fontSize: 11 }}>{pos.id}</span>
                 <button
                   onClick={() => copySingle(pos)}
-                  style={{ padding: "2px 7px", background: "transparent", border: "1px solid rgba(255,255,255,0.12)", borderRadius: 3, color: "#888", fontSize: 10, cursor: "pointer" }}
+                  style={{
+                    padding: "2px 7px",
+                    background: "transparent",
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    borderRadius: 3,
+                    color: "#888",
+                    fontSize: 10,
+                    cursor: "pointer",
+                  }}
                 >
                   Copy
                 </button>
@@ -278,7 +360,9 @@ export function DebugReadout({ positions, imageState, onImageChange, preset, onP
                 <div>
                   width <span style={{ color: "#e2e2e2" }}>{fmt(pos.width)}%</span>
                   {"  "}rot{" "}
-                  <span style={{ color: pos.rotation !== 0 ? "#ffd200" : "#e2e2e2" }}>{pos.rotation}°</span>
+                  <span style={{ color: pos.rotation !== 0 ? "#ffd200" : "#e2e2e2" }}>
+                    {pos.rotation}°
+                  </span>
                 </div>
               </div>
             </div>
