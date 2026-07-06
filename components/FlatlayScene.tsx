@@ -31,6 +31,11 @@ const IMG_SCALE = 1.45;
 const IMG_X = 49.5;
 const IMG_Y = 100.0;
 
+// Mobile (portrait phone) — tune via debug tool iPhone preset, then paste here
+const MOBILE_IMG_SCALE = 1.45;
+const MOBILE_IMG_X = 49.5;
+const MOBILE_IMG_Y = 100.0;
+
 function getPos(obj: FlatlayObjectDef, isMobile: boolean): ObjectPosition {
   if (isMobile && obj.mobile) return obj.mobile;
   return { top: obj.top, left: obj.left, width: obj.width, rotation: obj.rotation };
@@ -74,10 +79,10 @@ export function FlatlayScene() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
-  const [debugImage, setDebugImage] = useState<ImageState>({
-    scale: IMG_SCALE,
-    x: IMG_X,
-    y: IMG_Y,
+  const [debugImages, setDebugImages] = useState<Record<Preset, ImageState>>({
+    desktop: { scale: IMG_SCALE, x: IMG_X, y: IMG_Y },
+    iphone: { scale: MOBILE_IMG_SCALE, x: MOBILE_IMG_X, y: MOBILE_IMG_Y },
+    ipad: { scale: IMG_SCALE, x: IMG_X, y: IMG_Y },
   });
   const [debugPreset, setDebugPreset] = useState<Preset>("desktop");
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -103,9 +108,14 @@ export function FlatlayScene() {
     }
   }, [openPanelId]);
 
-  const imgScale = isDebug ? debugImage.scale : IMG_SCALE;
-  const imgX = isDebug ? debugImage.x : IMG_X;
-  const imgY = isDebug ? debugImage.y : IMG_Y;
+  const currentDebugImage = debugImages[debugPreset];
+  const imgScale = isDebug
+    ? currentDebugImage.scale
+    : isPhonePortrait
+      ? MOBILE_IMG_SCALE
+      : IMG_SCALE;
+  const imgX = isDebug ? currentDebugImage.x : isPhonePortrait ? MOBILE_IMG_X : IMG_X;
+  const imgY = isDebug ? currentDebugImage.y : isPhonePortrait ? MOBILE_IMG_Y : IMG_Y;
   const presetDims = isDebug ? PRESET_OPTIONS[debugPreset] : null;
   const flatlaySrc =
     (isDebug && debugPreset === "iphone") || (!isDebug && isPhonePortrait)
@@ -161,8 +171,13 @@ export function FlatlayScene() {
             key={debugPreset}
             objects={FLATLAY_OBJECTS}
             containerRef={containerRef}
-            imageState={debugImage}
-            onImageChange={(u) => setDebugImage((p) => ({ ...p, ...u }))}
+            imageState={currentDebugImage}
+            onImageChange={(u) =>
+              setDebugImages((prev) => ({
+                ...prev,
+                [debugPreset]: { ...prev[debugPreset], ...u },
+              }))
+            }
             preset={debugPreset}
             onPresetChange={setDebugPreset}
           />

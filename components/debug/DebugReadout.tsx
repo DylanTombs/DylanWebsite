@@ -30,8 +30,9 @@ function buildSingleTS(p: DebugPos): string {
   return `top: "${fmt(p.top)}%", left: "${fmt(p.left)}%", width: "${fmt(p.width)}%", rotation: ${p.rotation}`;
 }
 
-function buildImageTS(img: ImageState): string {
-  return `// Paste into FlatlayScene.tsx:\nconst IMG_SCALE = ${img.scale.toFixed(2)};\nconst IMG_X = ${img.x.toFixed(1)};\nconst IMG_Y = ${img.y.toFixed(1)};`;
+function buildImageTS(img: ImageState, preset: Preset): string {
+  const prefix = preset === "iphone" ? "MOBILE_" : "";
+  return `// Paste into FlatlayScene.tsx (${preset}):\nconst ${prefix}IMG_SCALE = ${img.scale.toFixed(2)};\nconst ${prefix}IMG_X = ${img.x.toFixed(1)};\nconst ${prefix}IMG_Y = ${img.y.toFixed(1)};`;
 }
 
 const PANEL_WIDTH = 256;
@@ -87,8 +88,8 @@ export function DebugReadout({
   }, []);
 
   const copyImage = useCallback(async () => {
-    await navigator.clipboard.writeText(buildImageTS(imageState));
-  }, [imageState]);
+    await navigator.clipboard.writeText(buildImageTS(imageState, preset));
+  }, [imageState, preset]);
 
   const sliderStyle: React.CSSProperties = {
     width: "100%",
