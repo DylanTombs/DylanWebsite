@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: "Inter", system-ui, sans-serif;
+    --font-geist-mono: "Geist Mono", "Menlo", monospace;
+  }
+
+  * {
+    @apply border-border-dim;
+  }
+
+  html {
+    @apply scroll-smooth;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg-base font-sans text-text-primary;
+  }
+
+  ::selection {
+    @apply bg-accent text-text-inverse;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-bg-base;
+  }
+}
+
+@layer utilities {
+  .grid-overlay {
+    background-image: theme("backgroundImage.grid-dim");
+    background-size: theme("backgroundSize.grid");
+  }
+
+  .text-gradient-accent {
+    @apply bg-gradient-to-r from-accent to-accent/60 bg-clip-text text-transparent;
+  }
+
+  .border-glow {
+    @apply border border-border-bright shadow-accent-glow;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blink,
+  .animate-ping {
+    animation: none;
+    opacity: 1;
+  }
+}
