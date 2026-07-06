@@ -72,10 +72,11 @@ export function FlatlayScene() {
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 1024);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const mq = window.matchMedia("(max-width: 1023px)");
+    setIsMobile(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
   }, []);
 
   const [debugImages, setDebugImages] = useState<Record<Preset, ImageState>>({
@@ -197,16 +198,30 @@ export function FlatlayScene() {
           background: "#0a0a0a",
         }}
       >
+        {/* CSS toggles which image is visible — no JS needed, works on first paint */}
         <Image
-          src={flatlaySrc}
+          src={FLATLAY_DESKTOP}
           alt="Workspace flat-lay"
           fill
           priority
           sizes="100vw"
-          className="object-cover"
+          className="hidden object-cover lg:block"
           style={{
-            objectPosition: `${imgX}% ${imgY}%`,
-            transform: `scale(${imgScale})`,
+            objectPosition: `${IMG_X}% ${IMG_Y}%`,
+            transform: `scale(${IMG_SCALE})`,
+            transformOrigin: "center center",
+          }}
+        />
+        <Image
+          src={FLATLAY_MOBILE}
+          alt="Workspace flat-lay"
+          fill
+          priority
+          sizes="100vw"
+          className="block object-cover lg:hidden"
+          style={{
+            objectPosition: `${MOBILE_IMG_X}% ${MOBILE_IMG_Y}%`,
+            transform: `scale(${MOBILE_IMG_SCALE})`,
             transformOrigin: "center center",
           }}
         />
