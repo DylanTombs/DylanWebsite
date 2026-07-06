@@ -28,6 +28,10 @@ export const metadata: Metadata = {
   keywords: ["Dylan Tombs", "software engineer", "University of Bath", "CS", "mathematics"],
   authors: [{ name: "Dylan Tombs" }],
   creator: "Dylan Tombs",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",
