@@ -86,9 +86,8 @@ export const experience: readonly Experience[] = [
     kind: "full-time",
     period: { start: "Dec 2025", current: true },
     bullets: [
-      "Led frontend re-architecture of production report-generation system, migrating from Angular to native React while preserving API compatibility and report integrity.",
-      "Refactored and deployed an Azure Function pipeline for a new AU region, introducing Durable Functions to parallelise workflows — reducing execution time by 30% and improving reliability for regional workloads.",
-      "Migrated 10+ reports serving 2,000+ active users; collaborated in daily engineering stand-ups and code reviews within a multi-developer team.",
+      "Worked within frontend re-architecture of production report-generation system, migrating from Angular to native React while preserving API compatibility and report integrity.",
+      "Designed and implemented an MCP (Model Context Protocol) server over the company data catalogue, enabling live grounded AI-assisted data discovery",
     ],
   },
   {
@@ -97,9 +96,8 @@ export const experience: readonly Experience[] = [
     kind: "internship",
     period: { start: "Jun 2025", end: "Aug 2025", current: false },
     bullets: [
-      "Led positioning of DeepLearnHS's proprietary AI engine through animation; collaborated with AI engineers to translate abstract model mechanics into a demo used in the Series A investment deck.",
-      "Automated 20+ sinusoidal wave generations via scripting, reducing manual keyframing by ~30% and accelerating iteration for investor feedback.",
-      "Optimised GPU render pipeline to reduce per-frame render time by 60% via mesh decimation and baking; delivered project 5 days ahead of schedule.",
+      "Refactored and deployed an Azure Function pipeline for a new AU region, introducing Durable Functions to parallelise workflows,",
+      "Migrated 10 Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configurationMigrated [X] Azure services to Terraform, enabling infrastructure-as-code provisioning across the engineering team and eliminating manual Azure portal configuration"
     ],
   },
   {
@@ -128,7 +126,7 @@ export const projects: readonly Project[] = [
     ],
   },
   {
-    name: "Production-Grade URL Shortener",
+    name: "Production URL Shortener with Caching",
     stack: ["Java", "Spring Boot", "AWS", "Redis", "PostgreSQL"],
     bullets: [
       "Built a URL shortening service using Spring Boot with a modular architecture and schema versioning via Flyway.",
@@ -146,7 +144,7 @@ export const education: readonly EducationEntry[] = [
   {
     institution: "University of Bath",
     qualification: "BSc Computer Science and Mathematics",
-    grade: "First — 76% (Top 50)",
+    grade: "First — 76%",
     period: { start: "2024", current: true },
   },
   {
@@ -169,7 +167,7 @@ export const skills: readonly SkillGroup[] = [
   {
     category: "frameworks",
     label: "Frameworks & Databases",
-    skills: ["Spring Boot", "React", "Docker", "Redis", "PostgreSQL"],
+    skills: ["Spring Boot", "React", "Docker", "Redis", "PostgresSQL"],
   },
   {
     category: "cloud-devops",
