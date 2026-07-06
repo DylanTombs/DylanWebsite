@@ -34,7 +34,7 @@ const IMG_Y = 100.0;
 // Mobile (portrait phone) — tune via debug tool iPhone preset, then paste here
 const MOBILE_IMG_SCALE = 1.45;
 const MOBILE_IMG_X = 49.5;
-const MOBILE_IMG_Y = 100.0;
+const MOBILE_IMG_Y = 50.0;
 
 function getPos(obj: FlatlayObjectDef, isMobile: boolean): ObjectPosition {
   if (isMobile && obj.mobile) return obj.mobile;
