@@ -70,11 +70,10 @@ export function FlatlayScene() {
     setIsDebug(new URLSearchParams(window.location.search).get("debug") === "true");
   }, []);
 
-  const [isMobile, setIsMobile] = useState(
-    () => typeof window !== "undefined" && window.innerWidth < 1024,
-  );
+  const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 1024);
+    check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
@@ -143,8 +142,8 @@ export function FlatlayScene() {
             overflow: "hidden",
             ...(presetDims
               ? {
-                  width: `min(${presetDims.width}px, 100vw)`,
-                  height: `min(${presetDims.height}px, 100dvh)`,
+                  width: presetDims.width,
+                  height: presetDims.height,
                   boxShadow: "0 0 0 1px rgba(255,255,255,0.15), 0 8px 48px rgba(0,0,0,0.8)",
                 }
               : { width: "100%", height: "100%" }),
