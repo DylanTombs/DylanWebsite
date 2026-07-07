@@ -72,7 +72,7 @@ export function FlatlayScene() {
 
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 1023px)");
+    const mq = window.matchMedia("(max-width: 499px)");
     setIsMobile(mq.matches);
     const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
     mq.addEventListener("change", handler);
@@ -205,7 +205,7 @@ export function FlatlayScene() {
           fill
           priority
           sizes="100vw"
-          className="hidden object-cover lg:block"
+          className="block object-cover max-[500px]:hidden"
           style={{
             objectPosition: `${IMG_X}% ${IMG_Y}%`,
             transform: `scale(${IMG_SCALE})`,
@@ -218,7 +218,7 @@ export function FlatlayScene() {
           fill
           priority
           sizes="100vw"
-          className="block object-cover lg:hidden"
+          className="hidden object-cover max-[500px]:block"
           style={{
             objectPosition: `${MOBILE_IMG_X}% ${MOBILE_IMG_Y}%`,
             transform: `scale(${MOBILE_IMG_SCALE})`,

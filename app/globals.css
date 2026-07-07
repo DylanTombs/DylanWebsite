@@ -24,6 +24,14 @@
     @apply bg-bg-base font-sans text-text-primary;
   }
 
+  /* Prevent the desktop layout from squishing on narrow browser windows.
+     Only applies to mouse/hover devices — phones are unaffected. */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      min-width: 960px;
+    }
+  }
+
   ::selection {
     @apply bg-accent text-text-inverse;
   }
