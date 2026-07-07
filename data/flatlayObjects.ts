@@ -155,7 +155,7 @@ export const FLATLAY_OBJECTS: readonly FlatlayObjectDef[] = [
     panelContent: {
       kind: "about",
       role: "CS & Mathematics · University of Bath",
-      bio: "Second-year student building distributed systems and ML inference engines. Targeting SWE roles at top-tier companies — currently open to 2026 internships and grad positions.",
+      bio: "Second-year student building distributed systems and ML inference engines. Targeting SWE roles at companies — currently open to 2027 grad positions.",
     },
   },
   {
